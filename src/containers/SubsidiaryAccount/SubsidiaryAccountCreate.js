@@ -65,6 +65,7 @@ const SubsidiaryAccountCreate = () => {
                           <div className="form-group">
                             <label>Account Title</label>
                             <input type="text" className="form-control" placeholder="Enter ..." />
+                            <small className={'text-danger'}>This is error message </small>
                           </div>
                         </div>
                         <div className="col-sm-6">

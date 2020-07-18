@@ -1,9 +1,13 @@
 import React, { Component, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import {getUserByField, getUserFullName, removeUserStorage} from "../../shared/Auth";
 
 const Header = () => {
-
-  
+    let history = useHistory();
+    const  logout = () => {
+      removeUserStorage();
+      history.push('/login');
+    }
     return (
       <div className="wrapper">
       <nav className="main-header navbar navbar-expand navbar-white navbar-light" >
@@ -13,7 +17,7 @@ const Header = () => {
         
           <Link to={'/'} className="navbar-brand" >
             <img src="/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3"/>
-            <span className="brand-text font-weight-light">Business Name</span>
+            <span className="brand-text font-weight-light">{getUserByField('pump_name')}</span>
           </Link>
         
         </li>
@@ -97,7 +101,7 @@ const Header = () => {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item dropdown">
           <a className="nav-link" data-toggle="dropdown" href="#">
-            <i className="far fa-user" /> Login as Admin
+            <i className="far fa-user" /> {getUserFullName()}
           </a>
           <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <a href="#" className="dropdown-item">
@@ -108,10 +112,13 @@ const Header = () => {
               <i className="fas fa-cog mr-2" /> Settings
             </a>
             <div className="dropdown-divider" />
-            <Link to={'/login'} className="dropdown-item" >
+            <button onClick={logout} className={'dropdown-item'} >
               <i className="fas fa-sign-out-alt mr-2" /> Logout
+            </button>
+            {/*<Link to={'/login'} className="dropdown-item" >*/}
+            {/*  <i className="fas fa-sign-out-alt mr-2" /> Logout*/}
             
-            </Link>
+            {/*</Link>*/}
             <div className="dropdown-divider" />
           </div>
         </li>

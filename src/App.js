@@ -14,6 +14,10 @@ import ProductInfoCreate from './containers/ProductInfo/ProductInfoCreate';
 import Tank from './containers/Tank/Tank';
 import CalibrationList from './containers/Calibration/CalibrationList';
 import CalibrationCreate from './containers/Calibration/CalibrationCreate';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoutes from "./shared/ProtectedRoutes";
+import NonProtectedRoutes from "./shared/NonProtectedRoutes";
 
 function App() {
   
@@ -21,8 +25,16 @@ function App() {
   return (
     
       <BrowserRouter>
-        <Route exact path="/login" component={Login} />
+        {/*<Route exact path="/login" component={Login} />*/}
 
+          {/*  Non Protected routes  */}
+            <NonProtectedRoutes exact path={'/login'} component={Login} />
+          {/*  Non Protected routes  */}
+
+
+          {/* Protected routes  */}
+        <ProtectedRoutes exact path="/dashboard" component={Dashboard} />
+          {/* Protected routes  */}
         <Route exact path="/subsidiary/accounts/" component={SubsidiaryAccountList} />
         <Route exact path="/subsidiary/accounts/create/" component={SubsidiaryAccountCreate} />
 
@@ -40,7 +52,9 @@ function App() {
         
         {/* <Route exact path="/subsidiary/accounts/create" component={Dashboard} /> */}
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/dashboard" component={Dashboard} />
+
+
+        <ToastContainer />
       </BrowserRouter>
   );
 }
